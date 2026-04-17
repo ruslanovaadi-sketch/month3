@@ -2,29 +2,21 @@ import flet as ft
 from datetime import datetime
 
 def main(page: ft.Page):
-    page.title = "Homework3"
+    page.title = "Привет"
 
     name_input = ft.TextField(label="Введите имя")
+    result_text = ft.Text()
 
-    result_text = ft.Text(value="")
-    
-def show_message(e):
-    name = name.input_value
+    def greet(e):
+        now = datetime.now()
+        formatted_time = now.strftime("%Y:%m:%d - %H:%M:%S")
+        result_text.value = f"{formatted_time} - Привет, {name_input.value}!"
+        page.update()
 
-    now = datetime.now()
+    btn = ft.ElevatedButton(text="Поздороваться", on_click=greet)
 
-    formatted_time = now.strftime("%Y:%m:%d - %H:%M:%S")
+    page.add(name_input, btn, result_text)
 
-    result_text.value = f"{formatted_time} Hello,{name}!"
-    page.update()
-
-button = ft.ElevatedButton(text="Show",on_click=show_message)
-
-page.add(
-    name_input,
-    button,
-    result_text
-)
 ft.app(target=main)
 
         
